@@ -105,4 +105,42 @@ create table attendance_staff_2024 (id bigserial,
 
 create table department (id bigserial primary key, department_name varchar(30))
 
+-- student sequence for ID
 
+create sequence student_seq start 10000
+
+
+-- user for db to use in service
+
+create user applicationims with PASSWORD 'mvjr@1998-2001' 
+grant postgres to applicationims
+
+
+create user admin with password 'admin@ims@2001' SUPERUSER INHERIT CREATEDB CREATEROLE;
+ALTER USER ADMIN WITH REPLICATION;
+ALTER USER ADMIN WITH BYPASSRLS;
+
+ALTER DATABASE "institution-mgmt" OWNER to admin;
+
+--  select 'ALTER TABLE ' || table_name || ' OWNER TO myuser;' from information_schema.tables where table_schema = 'public';
+ ALTER TABLE student OWNER TO admin;
+ ALTER TABLE fees_structure OWNER TO admin;
+ ALTER TABLE class OWNER TO admin;
+ ALTER TABLE attendance_student_2024 OWNER TO admin;
+ ALTER TABLE department OWNER TO admin;
+ ALTER TABLE attendance_staff_2024 OWNER TO admin;
+ ALTER TABLE staff OWNER TO admin;
+ 
+--  select 'ALTER TABLE ' || sequence_name || ' OWNER TO admin;' from information_schema.sequences where sequence_schema = 'public';
+
+ALTER TABLE student_id_seq OWNER TO admin;
+ ALTER TABLE staff_id_seq OWNER TO admin;
+ ALTER TABLE class_id_seq OWNER TO admin;
+ ALTER TABLE fees_structure_id_seq OWNER TO admin;
+ ALTER TABLE attendance_student_2024_id_seq OWNER TO admin;
+ ALTER TABLE department_id_seq OWNER TO admin;
+ ALTER TABLE attendance_staff_2024_id_seq OWNER TO admin;
+ ALTER TABLE student_seq OWNER TO admin;
+ 
+ 
+ 
